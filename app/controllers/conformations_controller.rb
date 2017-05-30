@@ -1,4 +1,5 @@
 class ConfirmationsController < Milia::ConfirmationsController
+  before_action      :set_confirmable, :only => [ :update, :show ]
   # PUT /resource/confirmation
   # entered ONLY on invite-members usage to set password at time of confirmation
   def update
@@ -64,7 +65,6 @@ class ConfirmationsController < Milia::ConfirmationsController
   private
   
   def set_confirmable() 
-    
     @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
   end
 end
